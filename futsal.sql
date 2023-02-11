@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 10, 2023 at 04:21 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Feb 11, 2023 at 03:29 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,15 +32,16 @@ CREATE TABLE `login_user` (
   `username` varchar(20) NOT NULL,
   `pwd` varchar(100) NOT NULL,
   `lvl` varchar(12) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `login_user`
 --
 
 INSERT INTO `login_user` (`id`, `username`, `pwd`, `lvl`) VALUES
-(1, 'Admin', '$2y$10$IUm3z7.WVwBrv3gA6U6rYuH6XkiG/D5z.g2Yjc290yXF4uvzvDmEm', 'User'),
-(2, 'AbdulH', '$2y$10$GPOPxc7on6T4jZbgM2cj/Oy.HsfQUSGn3iwOcKYkBDmwGrJ50ezwC', 'User');
+(1, 'Admin', '$2y$10$IUm3z7.WVwBrv3gA6U6rYuH6XkiG/D5z.g2Yjc290yXF4uvzvDmEm', 'Admin'),
+(2, 'AbdulH', '$2y$10$GPOPxc7on6T4jZbgM2cj/Oy.HsfQUSGn3iwOcKYkBDmwGrJ50ezwC', 'User'),
+(3, 'Tester', '$2y$10$bXsBDLUjefRXVRLD8bcXk.lSHBzFmkY/felqTHgvDg1C5QEXevI6G', 'User');
 
 -- --------------------------------------------------------
 
@@ -54,7 +55,7 @@ CREATE TABLE `main` (
   `dt` date NOT NULL,
   `time_st` time NOT NULL,
   `time_ed` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `main`
@@ -67,7 +68,8 @@ INSERT INTO `main` (`id`, `team`, `dt`, `time_st`, `time_ed`) VALUES
 (4, '1', '2023-02-09', '22:33:00', '23:33:00'),
 (5, '1', '2023-02-16', '13:33:00', '22:39:00'),
 (6, '1', '2023-02-15', '10:34:00', '12:34:00'),
-(7, '2', '2023-02-17', '11:34:00', '22:39:00');
+(7, '2', '2023-02-17', '11:34:00', '22:39:00'),
+(8, '3', '2023-02-07', '00:11:00', '14:11:00');
 
 -- --------------------------------------------------------
 
@@ -80,7 +82,7 @@ CREATE TABLE `players` (
   `name` varchar(100) NOT NULL,
   `role` varchar(20) NOT NULL,
   `team` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `players`
@@ -102,7 +104,7 @@ CREATE TABLE `profile_user` (
   `email` varchar(50) NOT NULL,
   `no_tel` varchar(20) NOT NULL,
   `team` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `profile_user`
@@ -110,7 +112,8 @@ CREATE TABLE `profile_user` (
 
 INSERT INTO `profile_user` (`id`, `username`, `name`, `email`, `no_tel`, `team`) VALUES
 (1, 'Admin', 'Haidhar', 'abc@gmail.com', '0139568264', '1'),
-(2, 'AbdulH', 'Abdul Hakim', 'def@gmail.com', '0167098410', '2');
+(2, 'AbdulH', 'Abdul Hakim', 'def@gmail.com', '0167098410', '2'),
+(3, 'Tester', 'Habib', 'hij@gmai;.com', 'pkqqpq', '3');
 
 -- --------------------------------------------------------
 
@@ -122,7 +125,7 @@ CREATE TABLE `role` (
   `id` int(11) NOT NULL,
   `role` varchar(20) NOT NULL,
   `description` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `role`
@@ -140,16 +143,18 @@ INSERT INTO `role` (`id`, `role`, `description`) VALUES
 
 CREATE TABLE `team` (
   `id` int(11) NOT NULL,
+  `username` varchar(20) NOT NULL,
   `team` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `team`
 --
 
-INSERT INTO `team` (`id`, `team`) VALUES
-(1, 'Isami Gucci'),
-(2, 'Kamen Rider');
+INSERT INTO `team` (`id`, `username`, `team`) VALUES
+(1, 'Admin', 'Isami Gucci'),
+(2, 'AbdulH', 'Kamen Rider'),
+(3, 'Tester', 'oikik');
 
 --
 -- Indexes for dumped tables
@@ -199,13 +204,13 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `login_user`
 --
 ALTER TABLE `login_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `main`
 --
 ALTER TABLE `main`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `players`
@@ -217,7 +222,7 @@ ALTER TABLE `players`
 -- AUTO_INCREMENT for table `profile_user`
 --
 ALTER TABLE `profile_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -229,7 +234,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
