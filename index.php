@@ -88,14 +88,12 @@ $team = mysqli_query($connect, $list);
                             # code...
                         ?>
                         <li class="page-item"><a class="page-link" href="index.php?page=<?php echo $i; ?>"><?php echo $i;}?></a></li>
-                        <li class="page-item"><a href="index.php?page=<?php echo $page+1; ?>" class="page-link"><i class="tf-icon bx bx-chevron-right"></i></a></li>
+                        <li class="page-item next"><a href="index.php?page=<?php echo $page+1; ?>" class="page-link"><i class="tf-icon bx bx-chevron-right"></i></a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>     
-
-                </div> <!--Do not touch. This is not supposed to be touched -->
             <?php include 'foot.html';?> 
         </div> <!--Do not touch. This is not supposed to be touched -->
       </div> <!--Do not touch. This is not supposed to be touched -->

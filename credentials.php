@@ -11,13 +11,16 @@ switch ($_POST['action']) {
         $phone = $_POST['phone'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $query = "INSERT INTO login_user (username, pwd, lvl) VALUES ('$username', '$password', 'User')";
-        $queryTeam = "INSERT INTO team(team) VALUES ('$team')";
-        $registerTeam = mysqli_query($connect, $queryTeam);
+        $queryTeam = "INSERT INTO team(username, team) VALUES ('$username', '$team')";
         $register = mysqli_query($connect, $query);
+        mysqli_query($connect, $queryTeam);
 
         if ($register) {
             # code...
-            $profile ="INSERT INTO profile_user (username, name, team, email, no_tel) VALUES ('$username', '$name', '$team', '$email', '$phone')";
+            $teamList = "SELECT * FROM team WHERE username='$_POST[username]'";
+            $teamQuery = mysqli_query($connect, $teamList);
+            $teamResult = mysqli_fetch_array($teamQuery);
+            $profile ="INSERT INTO profile_user (username, name, team, email, no_tel) VALUES ('$username', '$name', '$teamResult[id]', '$email', '$phone')";
             mysqli_query($connect, $profile); 
             header("location: login.html");
         }
