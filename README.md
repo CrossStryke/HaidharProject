@@ -16,7 +16,17 @@ Manager:
 
 v 1.0.0:
 -
-- Developed website
-- Basic feature
-- No verification
-- Room for improvement
+- Website developed
+
+Admin:
+- Can view the list of reservation
+- Can delete manager if manager is not interested anymore
+- Can view players that have been registered by manager
+
+Manager:
+- Can make reservation
+- Can register player in the team
+- Can delete player that are not registered under that manager
+
+Homepage:
+- Can view the list of all reservation
