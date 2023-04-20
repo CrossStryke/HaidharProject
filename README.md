@@ -12,7 +12,7 @@ Admin:
 
 Manager:
 - Now can register player with the reservation
-- 
+- Can view the status for the reservation
 
 v 1.0.0:
 -
