@@ -13,6 +13,7 @@ Admin:
 Manager:
 - Now can register player with the reservation
 - Can view the status for the reservation
+- Each player can be registered once with every form and no redundance data in the registration
 
 v 1.0.0:
 -
