@@ -20,9 +20,9 @@ switch ($_POST['action']) {
             $teamList = "SELECT * FROM team WHERE username='$_POST[username]'";
             $teamQuery = mysqli_query($connect, $teamList);
             $teamResult = mysqli_fetch_array($teamQuery);
-            $profile ="INSERT INTO profile_user (username, name, team, email, no_tel) VALUES ('$username', '$name', '$teamResult[id]', '$email', '$phone')";
+            $profile ="INSERT INTO profile_user (username, name, team, email, no_tel, photo) VALUES ('$username', '$name', '$teamResult[id]', '$email', '$phone', 'uploads/blank.png')";
             mysqli_query($connect, $profile); 
-            header("location: login.html");
+            header("location: login.php");
         }
         break;
     case 'login': // For registered user
