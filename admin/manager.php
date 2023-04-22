@@ -106,7 +106,7 @@ $team = mysqli_query($connect, $list);
         </div>     
 
                 </div> <!--Do not touch. This is not supposed to be touched -->
-            <?php include 'foot.html';?> 
+            <?php include '../foot.html';?> 
         </div> <!--Do not touch. This is not supposed to be touched -->
       </div> <!--Do not touch. This is not supposed to be touched -->
     </div> <!--Do not touch. This is not supposed to be touched -->

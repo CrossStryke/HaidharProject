@@ -1,0 +1,124 @@
+<?php 
+include "auth.php";
+$loginQuery = "SELECT * FROM login_user WHERE username='$_SESSION[username]'";
+$profile = "SELECT * FROM profile_user WHERE username='$_SESSION[username]'";
+$query = mysqli_query($connect, $profile);
+$login = mysqli_query($connect, $loginQuery);
+
+$result = mysqli_fetch_array($query);
+$resultLogin = mysqli_fetch_array($login);
+include 'temp.php';
+
+$queryTeam = "SELECT * FROM team";
+$teamName = mysqli_query($connect, $queryTeam);
+
+// Pagination
+$num_per_page = 10;
+if (isset($_GET["page"])) {
+    # code...
+    $page = $_GET["page"];
+    if ($page == 0) {
+        # code...
+        $page = 1;
+    }
+}
+else {
+    # code...
+    $page = 1;
+}
+$start_from = ($page - 1)*$num_per_page;
+
+$queryPlayers = "SELECT * FROM players LIMIT $start_from, $num_per_page";
+$playerList = mysqli_query($connect, $queryPlayers);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players of <?php echo $result['team']?></title>
+</head>
+<body>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4">Players List</h4>
+        <div class="row">
+            <div class="col-xxl">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <!-- Search function -->
+                        <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                            <!-- Search -->
+                            <div class="navbar-nav align-items-center">
+                                <form class="d-flex">
+                                    <select name="" class="form-control me-2">
+                                        <option value="" hidden>Select your team</option>
+                                        <?php 
+                                            while ($teamSearch = mysqli_fetch_array($teamName)) {
+                                                # code...
+                                        ?>
+                                        <option value="<?php echo $teamSearch['id']; ?>"><?php echo $teamSearch['team']; }?></option>
+                                    </select>
+                                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                                </form>
+                            </div>
+                            <!-- /Search -->
+                        </div>
+                        <br>
+                        <table class="table">
+                            <tr>
+                                <th>Bil</th>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Role</th>
+                            </tr>
+                            
+                            <tr>
+                                <?php 
+                                $bil = 1;// Index count
+                                // Getting data from thee players table
+                                while ($players = mysqli_fetch_array($playerList)) {
+                                    # code...
+                                 
+
+                                // Getting the relevant data from the team and role table
+                                $queryTeam = "SELECT * FROM team WHERE id='$players[team]'";
+                                $teamList = mysqli_query($connect, $queryTeam);
+                                $team = mysqli_fetch_array($teamList);
+
+                                $queryRole = "SELECT * FROM position WHERE id='$players[pos]'";
+                                $roleList = mysqli_query($connect, $queryRole);
+                                $position = mysqli_fetch_array($roleList);
+                                ?>
+                                <td><?php echo $bil; ?></td>
+                                <td><?php echo $players['name']; ?></td>
+                                <td><?php echo $team['team']; ?></td>
+                                <td><?php echo $position['description'];?></td>
+                            </tr>
+                            <?php 
+                            $bil++;
+                                }?>
+                        </table>
+                        <br>
+                        <ul class="pagination">
+                        <?php 
+                        $query = "SELECT * FROM players";
+                        $tableList = mysqli_query($connect, $query);
+                        $total_records = mysqli_num_rows($tableList);
+                        $total_page = ceil($total_records/$num_per_page);
+                        ?> 
+                        <li class="page-item prev"><a href="player.php?page=<?php echo $page-1; ?>" class="page-link"><i class="tf-icon bx bx-chevron-left"></i></a></li>
+                        <?php
+                        for ($i=1; $i<= $total_page; $i++) { 
+                            # code...
+                        ?>
+                        <li class="page-item"><a class="page-link" href="player.php?page=<?php echo $i; ?>"><?php echo $i;}?></a></li>
+                        <li class="page-item next"><a href="player.php?page=<?php echo $page+1; ?>" class="page-link"><i class="tf-icon bx bx-chevron-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -29,7 +29,7 @@ else {
 $start_from = ($page - 1)*$num_per_page;
 
 // Import data from database
-$list = "SELECT * FROM main LIMIT $start_from, $num_per_page";
+$list = "SELECT * FROM main ORDER BY id DESC LIMIT $start_from, $num_per_page ";
 $team = mysqli_query($connect, $list);
 ?>
 
@@ -55,6 +55,8 @@ $team = mysqli_query($connect, $list);
                                 <th>Tarikh</th>
                                 <th>Masa Mula</th>
                                 <th>Masa Akhir</th>
+                                <th>Status</th>
+                                <th></th>
                             </tr>
                             
                             <?php 
@@ -73,6 +75,29 @@ $team = mysqli_query($connect, $list);
                                 <td><?php echo date("d/m/Y", strtotime($mgr['dt'])); ?></td>
                                 <td><?php echo date("h:i A", strtotime($mgr['time_st'])); ?></td>
                                 <td><?php echo date("h:i A", strtotime($mgr['time_ed'])); ?></td>
+                                <td class="
+                                <?php
+                                switch ($mgr['stat']) {
+                                    case 'Approved':
+                                        # code...
+                                        echo "alert alert-success";
+                                        break;
+                                    
+                                    case 'Rejected':
+                                        # code...
+                                        echo "alert alert-danger";
+                                        break; 
+
+                                    case 'Pending':
+                                        # code...
+                                        echo "alert alert-warning";
+                                        break;   
+                                    default:
+                                        # code...
+                                        echo "alert alert-primary";
+                                        break;
+                                } ?>"><?php echo $mgr['stat'];?></td>
+                                <td><a href="details.php?id=<?php echo $mgr['id'];?>"><button class="btn btn-primary">Details</button></a></td>
                             </tr>
                             <?php 
                             $bil++;
@@ -102,7 +127,7 @@ $team = mysqli_query($connect, $list);
         </div>     
 
                 </div> <!--Do not touch. This is not supposed to be touched -->
-            <?php include 'foot.html';?> 
+            <?php include '../foot.html';?> 
         </div> <!--Do not touch. This is not supposed to be touched -->
       </div> <!--Do not touch. This is not supposed to be touched -->
     </div> <!--Do not touch. This is not supposed to be touched -->

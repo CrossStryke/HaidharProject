@@ -147,15 +147,15 @@
             </li>
 
             <li class="menu-item">
-              <a href="form.php" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Reservation</div>
+              <a href="manager.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                <div data-i18n="Analytics">Managers</div>
               </a>
             </li>
 
             <li class="menu-item">
               <a href="player.php" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <i class="menu-icon tf-icons bx bxs-user-detail"></i>
                 <div data-i18n="Analytics">Players</div>
               </a>
             </li>
