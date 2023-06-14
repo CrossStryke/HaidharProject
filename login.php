@@ -121,6 +121,12 @@
                     <label class="form-check-label" for="remember-me"> Remember Me </label>
                   </div>
                 </div>
+                <!-- Error message -->
+                <?php  if (isset($_GET['error'])) { ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?=$_GET['error'] ?>
+                    </div>
+                <?php } ?>
                 <div class="mb-3">
                   <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                 </div>
