@@ -48,29 +48,29 @@ switch ($_POST['action']) {
                     switch ($_SESSION['lvl']) {
                         case 'SuperAdmin':
                             # code...
-                            header('location: ../futsal/superadmin/index.php'); # The redirect for Super Admin
+                            header('location: superadmin/index.php'); # The redirect for Super Admin
                             break;
                         
                         case 'Admin':
                             # code...
-                            header('location: ../futsal/admin/index.php'); # Redirect it to the admin page
+                            header('location: admin/index.php'); # Redirect it to the admin page
                             break;    
 
                         default:
                             # code...
-                            header('location: ../futsal/user/index.php'); # Redirect it to the user page
+                            header('location: user/index.php'); # Redirect it to the user page
                             break;
                     }
                 }
                 else {
-                    # code...
-                    header("location: login.html");
+                    # code for incorrect username or password
+                    header("location: login.php?error= Username or password is incorrect");
                 }
             }
         }
         else {
-            # code...
-            header("location: login.php");
+            # code for data not exist in the database
+            header("location: login.php?error= You are no registered");
         }
         break;
     default:
