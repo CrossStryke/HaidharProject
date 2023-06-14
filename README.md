@@ -1,7 +1,7 @@
 v 2.0.0:
 -
 - System improvement from all aspects
-- Reset password feature is available
+- Reset password feature is in progress
 
 Homepage:
 - New and improved homepage
